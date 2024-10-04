@@ -14,19 +14,37 @@ class NoteMenu(private val archive: Archive) {
     }
 
     private fun createNote () {
-        val scanner = Scanner(System.`in`)
-
         while (true) {
-            println()
-            print("Введите название заметки: ")
-            val name = scanner.nextLine()
 
-            print("Введите содержимое заметки: ")
-            val content = scanner.nextLine()
+            val scanner = Scanner(System.`in`)
 
-            if (name.isEmpty() || content.isEmpty()) {
-                println("Название или содержимое заметки не может быть пустым:")
-            } else {
+            var name: String
+            var content: String
+
+
+            while (true) {
+                while(true) {
+                    println()
+                    print("Введите название заметки: ")
+                    name = scanner.nextLine()
+
+                    if (name.isEmpty()) {
+                        println("Название заметки не может быть пустым")
+                    } else {
+                        break
+                    }
+                }
+
+                while (true) {
+                    print("Введите содержимое заметки: ")
+                    content = scanner.nextLine()
+
+                    if (content.isEmpty()) {
+                        println("Содержимое заметки не может быть пустым")
+                    } else {
+                        break
+                    }
+                }
                 archive.notes.add(Note(name, content))
                 return
             }
