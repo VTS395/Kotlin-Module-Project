@@ -1,7 +1,7 @@
 import java.util.Scanner
 
 class NoteMenu(private val archive: Archive) {
-
+    private val scanner = Scanner(System.`in`)
     private val menuManager = MenuManager()
 
     fun showMenu() {
@@ -16,7 +16,7 @@ class NoteMenu(private val archive: Archive) {
     private fun createNote () {
         while (true) {
 
-            val scanner = Scanner(System.`in`)
+
 
             var name: String
             var content: String
@@ -26,9 +26,9 @@ class NoteMenu(private val archive: Archive) {
                 while(true) {
                     println()
                     print("Введите название заметки: ")
-                    name = scanner.nextLine()
+                    name = scanner.nextLine().trim()
 
-                    if (name.isEmpty()) {
+                    if (name.isBlank()) {
                         println("Название заметки не может быть пустым")
                     } else {
                         break
@@ -37,26 +37,26 @@ class NoteMenu(private val archive: Archive) {
 
                 while (true) {
                     print("Введите содержимое заметки: ")
-                    content = scanner.nextLine()
+                    content = scanner.nextLine().trim()
 
-                    if (content.isEmpty()) {
+                    if (content.isBlank()) {
                         println("Содержимое заметки не может быть пустым")
                     } else {
                         break
                     }
                 }
-                archive.notes.add(Note(name, content))
+                archive.addNote(name, content)
                 return
             }
         }
     }
 
     private fun showNote() {
-        if (archive.notes.isEmpty()) {
+        if (archive.isNotesEmpty()) {
             println("В архиве нет заметок")
             return
         }
-        val menuItems = archive.notes.mapIndexed { _, note ->
+        val menuItems = archive.getNotes().mapIndexed { _, note ->
             note.title to {
                 println();
                 println("Название заметки: ${note.title}");
