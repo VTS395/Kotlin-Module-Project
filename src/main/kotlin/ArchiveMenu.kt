@@ -1,7 +1,6 @@
 import java.util.Scanner
 
 class ArchiveMenu {
-    private val scanner = Scanner(System.`in`)
 
     private val menuManager = MenuManager()
     private val archives = mutableListOf<Archive>()
@@ -15,18 +14,7 @@ class ArchiveMenu {
     }
 
     private fun createArchive() {
-        while (true) {
-            println()
-            print("Введите имя нового архива: ")
-            val archiveName = scanner.nextLine().trim()
-
-            if(archiveName.isBlank()) {
-                println("Имя архива не может быть пустым")
-            } else {
-                archives.add(Archive(archiveName))
-                return
-            }
-        }
+        archives.add(menuManager.archiveInput())
     }
 
     private fun selectArchive() {

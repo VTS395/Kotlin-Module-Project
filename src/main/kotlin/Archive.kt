@@ -11,8 +11,8 @@ class Archive(val name: String) {
         noteMenu.showMenu()
     }
 
-    fun addNote (title: String, content: String) {
-        notes.add(Note(title, content))
+    fun addNote (note: Note) {
+        notes.add(note)
     }
 
     fun isNotesEmpty() : Boolean {
